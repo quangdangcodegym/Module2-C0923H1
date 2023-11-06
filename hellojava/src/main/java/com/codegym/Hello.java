@@ -1,5 +1,6 @@
 package com.codegym;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -16,6 +17,7 @@ public class Hello {
     // Hàm main: hàm chạy đầu tiên, chạy chính
     public static void main(String[] args) {
 
+        System.out.println(Arrays.toString(args));
         /**
         System.out.println("HELLO 3AE");            //print line: println In ra màn hình
         System.out.print(20);                       // println: xuống dong, print: trên 1 dòng
