@@ -46,12 +46,46 @@ public class ArrayMain {
          */
         int [] numbers = {13, 6, 2, 9, 7};
 
-
-
-
-
-
-
+        printArray(numbers);
+        System.out.println(findMax(numbers));
+        System.out.println(findFirstIndexEven(numbers));
 
     }
+    public static void printArray(int [] arr){
+        for(int i = 0;i< arr.length;i++){
+            System.out.println(arr[i]);
+        }
+    }
+    public static int getTotal(int [] numbers){
+        int  total= 0;      // biến cục bô: chỉ có phạm vi trong hàm, ra khỏi hàm ko có ton tại
+
+        for(int i=0;i<numbers.length;i++){
+            total += numbers[i];
+        }
+        return total;
+    }
+
+    public static int findMax(int [] numbers){
+        if (numbers.length == 0) {
+            throw new RuntimeException("Mảng ko hợp lệ");
+        }
+        int max = numbers[0];
+
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] > max) {
+                max = numbers[i];
+            }
+        }
+        return max;
+    }
+
+    public static int findFirstIndexEven(int [] numbers){
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] % 2 == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
