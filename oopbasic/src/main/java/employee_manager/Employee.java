@@ -2,15 +2,16 @@ package employee_manager;
 
 public class Employee {
 
-    public final static String employeeTypeExperience = "Experience";
-    public final static String employeeTypeFresher  = "Fresher";
-    public final static String employeeTypeIntern   = "Intern";
+
 
     protected long id;              // thuộc tính, biến instance của đổi tượng, biến toàn cục: có giá tri mặc định
     protected String fullName;
     protected String email;
-    protected String employeeType;
+    protected EmployeeType employeeType;
     protected static int employeeCount = 0;
+
+
+    protected static int currentId = 1;
 
     public int getEmployeeCount() {
         return employeeCount;
@@ -20,14 +21,13 @@ public class Employee {
         this.employeeCount = employeeCount;
     }
 
-    public Employee(long id, String fullName, String email){
-        this.id = id;
+    public Employee(String fullName, String email){
         this.email = email;
         this.fullName = fullName;
-        employeeCount++;
+
     }
     public Employee(){
-        employeeCount++;
+
     }
 
     public long getId() {
@@ -55,25 +55,21 @@ public class Employee {
     }
 
 
-    public String getEmployeeType() {
+    public EmployeeType getEmployeeType() {
         return employeeType;
     }
 
-    public void setEmployeeType(String employeeType) {
+    public void setEmployeeType(EmployeeType employeeType) {
         this.employeeType = employeeType;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "employeeTypeExperience='" + employeeTypeExperience + '\'' +
-                ", employeeTypeFresher='" + employeeTypeFresher + '\'' +
-                ", employeeTypeIntern='" + employeeTypeIntern + '\'' +
-                ", id=" + id +
+                "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
-                ", employeeType='" + employeeType + '\'' +
-                ", employeeCount=" + employeeCount +
+                ", employeeType=" + employeeType +
                 '}';
     }
 }

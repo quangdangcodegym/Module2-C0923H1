@@ -7,27 +7,16 @@ public class Intern extends Employee{
     private int semester;
     private String universityName;
 
-    public Intern(long id, String fullName, String email, String majors, int semester, String universityName) {
-        super(id, fullName, email);
+    public Intern(String fullName, String email, String majors, int semester, String universityName) {
+        super(fullName, email);
         this.majors = majors;
         this.semester = semester;
         this.universityName = universityName;
+
+        employeeCount++;
+        this.id = currentId++;
+        this.employeeType = EmployeeType.INTERN;
     }
 
-    @Override
-    public String toString() {
-        return "Intern{" +
-                "majors='" + majors + '\'' +
-                ", semester=" + semester +
-                ", universityName='" + universityName + '\'' +
-                ", employeeTypeExperience='" + employeeTypeExperience + '\'' +
-                ", employeeTypeFresher='" + employeeTypeFresher + '\'' +
-                ", employeeTypeIntern='" + employeeTypeIntern + '\'' +
-                ", id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
-                ", employeeType='" + employeeType + '\'' +
-                ", employeeCount=" + employeeCount +
-                '}';
-    }
+
 }

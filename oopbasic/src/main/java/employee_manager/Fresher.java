@@ -9,7 +9,7 @@ public class Fresher extends Employee{
 
     private String education;
 
-    public Fresher(long id, String fullName, String email, LocalDate graduationDate, String graduationRank, String education) {
+    public Fresher(String fullName, String email, LocalDate graduationDate, String graduationRank, String education) {
         // Dung super gọi tới hàm khởi tạo
         //        super(id, fullName, email);
 
@@ -23,32 +23,27 @@ public class Fresher extends Employee{
 //        this.setFullName(fullName);
 //        this.setId(id);
 
-        this.id = id;
-        this.email = email;
-        this.fullName = fullName;
+//        this.email = email;
+//        this.fullName = fullName;
+        super(fullName, email);
+        this.graduationDate = graduationDate;
+        this.graduationRank = graduationRank;
+        this.education = education;
+        employeeCount++;
 
+        this.employeeType = EmployeeType.FRESHER;
+        this.id = currentId++;
     }
 
-    public Fresher(long id, String fullName, String email){
-        super(id, fullName, email);
+
+    public Fresher(String fullName, String email){
+        super(fullName, email);
+        employeeCount++;
+
+        this.id = currentId++;
     }
 
-    @Override
-    public String toString() {
-        return "Fresher{" +
-                "graduationDate=" + graduationDate +
-                ", graduationRank='" + graduationRank + '\'' +
-                ", education='" + education + '\'' +
-                ", employeeTypeExperience='" + employeeTypeExperience + '\'' +
-                ", employeeTypeFresher='" + employeeTypeFresher + '\'' +
-                ", employeeTypeIntern='" + employeeTypeIntern + '\'' +
-                ", id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
-                ", employeeType='" + employeeType + '\'' +
-                ", employeeCount=" + employeeCount +
-                '}';
-    }
+
 
 
     public LocalDate getGraduationDate() {

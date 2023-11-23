@@ -10,30 +10,29 @@ public class Experience extends Employee{
 //        super()
     }
 
-    public Experience(long id, String fullName, String email, int expInYear, String proSkill){
-        super(id, fullName, email);
-
+    public Experience(String fullName, String email, int expInYear, String proSkill){
+        super(fullName, email);
         this.expInYear = expInYear;
         this.proSkill = proSkill;
+        employeeCount++;
+
+//        currentId++;
+//        this.id = currentId;
+
+        this.employeeType = EmployeeType.EXPERIENCE;
+        this.id = currentId++;
     }
-    public Experience(long id, String fullName, String email){
-        super(id, fullName, email);
+    public Experience(String fullName, String email){
+        super(fullName, email);
+        employeeCount++;
+
+        //        currentId++;
+//        this.id = currentId;
+
+        this.id = currentId++;
     }
 
-    @Override
-    public String toString() {
-        return "Experience{" +
-                "proSkill='" + proSkill + '\'' +
-                ", employeeTypeExperience='" + employeeTypeExperience + '\'' +
-                ", employeeTypeFresher='" + employeeTypeFresher + '\'' +
-                ", employeeTypeIntern='" + employeeTypeIntern + '\'' +
-                ", id=" + id +
-                ", fullName='" + fullName + '\'' +
-                ", email='" + email + '\'' +
-                ", employeeType='" + employeeType + '\'' +
-                ", employeeCount=" + employeeCount +
-                '}';
-    }
+
 
     public int getExpInYear() {
         return expInYear;
