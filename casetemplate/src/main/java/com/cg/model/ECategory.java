@@ -1,4 +1,4 @@
-package model;
+package com.cg.model;
 
 public enum ECategory {
     APPLE(1, "Apple"), SAMSUNG(2, "Samsung");

@@ -1,4 +1,6 @@
-import view.ProductView;
+package com.cg;
+
+import com.cg.view.ProductView;
 
 public class ShopApplication {
     private ProductView productView;

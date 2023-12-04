@@ -1,6 +1,6 @@
-package utils;
+package com.cg.utils;
 
-import model.Product;
+import com.cg.model.Product;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,7 +1,7 @@
-package model;
+package com.cg.model;
 
 public enum ERole {
-    USER(1, "model.User"), ADMIN(2, "Admin");
+    USER(1, "com.cg.model.User"), ADMIN(2, "Admin");
     private long id;
     private String name;
     ERole(long id, String name) {

@@ -1,4 +1,6 @@
-package model;
+package com.cg.model;
+
+import java.time.LocalDate;
 
 public class User {
     private long id;
@@ -6,12 +8,22 @@ public class User {
     private String password;
 
     private ERole eRole;
+    private LocalDate createAt;
 
     public User(long id, String name, String password, ERole eRole) {
         this.id = id;
         this.name = name;
         this.password = password;
         this.eRole = eRole;
+        this.createAt = LocalDate.now();
+    }
+
+    public LocalDate getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDate createAt) {
+        this.createAt = createAt;
     }
 
     public long getId() {

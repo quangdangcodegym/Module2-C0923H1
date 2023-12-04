@@ -1,20 +1,20 @@
-package service;
+package com.cg.service;
 
-import model.ECategory;
-import model.ERole;
-import model.Product;
-import model.User;
-import utils.Config;
-import utils.DateUtils;
-import utils.FileUtils;
+import com.cg.model.ECategory;
+import com.cg.model.ERole;
+import com.cg.model.Product;
+import com.cg.model.User;
+import com.cg.utils.Config;
+import com.cg.utils.DateUtils;
+import com.cg.utils.FileUtils;
 
+import javax.swing.*;
 import java.io.*;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class ProductService {
     public List<Product> getAll() {
@@ -71,9 +71,50 @@ public class ProductService {
 
     public void addProduct(Product pNew) {
         List<Product> products = getAll();
-        pNew.setId(Product.currentId++);
+        pNew.setId(++Product.currentId);
         products.add(pNew);
 
         FileUtils.writeFile(products, Config.PATH_FILE_PRODUCT);
     }
+
+    public List<Product> searchProduct(String kw) {         // 1
+        List<Product> products = getAll();
+
+        List<Product> results = new ArrayList<>();
+        for (int i = 0; i<  products.size(); i++) {
+            if (products.get(i).getName().toLowerCase().contains(kw.toLowerCase()) ||
+                    products.get(i).geteCategory().getName().toLowerCase().contains(kw.toLowerCase())) {
+                results.add(products.get(i));
+            }
+        }
+//        products.stream().filter(product -> product.getName().toLowerCase().contains(kw.toLowerCase()) ||
+//                product.geteCategory().getName().toLowerCase().contains(kw.toLowerCase()));
+
+        return results;
+    }
+
+    public Product findBy(long id) {
+        List<Product> products = getAll();
+        return products.stream().filter(product -> product.getId() == id).findFirst().get();
+    }
+
+    public void updateProduct(long id, Product productEdit) {
+        List<Product> products = getAll();
+        for (int i = 0 ; i < products.size(); i++) {
+            if (products.get(i).getId() == id) {
+                products.set(i, productEdit);
+            }
+        }
+        FileUtils.writeFile(products, Config.PATH_FILE_PRODUCT);
+    }
+
+
+    public boolean removeProduct(long id) {
+        List<Product> products = getAll();
+        boolean result =  products.removeIf(product -> product.getId() == id);
+
+        FileUtils.writeFile(products, Config.PATH_FILE_PRODUCT);
+        return result;
+    }
+
 }
