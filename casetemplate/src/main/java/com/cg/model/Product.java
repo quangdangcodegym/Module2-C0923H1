@@ -1,8 +1,11 @@
 package com.cg.model;
 
+import com.cg.utils.DateUtils;
+
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-public class Product {
+public class Product implements IParser{
     public static long currentId = 0;
     private long id;
     private String name;
@@ -30,6 +33,13 @@ public class Product {
         this.userCreated = userCreated;
         this.eCategory = eCategory;
         this.createAt = createAt;
+    }
+    public Product() {
+
+    }
+
+    public Product(long id) {
+        this.id = id;
     }
 
     @Override
@@ -94,4 +104,26 @@ public class Product {
     public void setCreateAt(LocalDate createAt) {
         this.createAt = createAt;
     }
+
+    @Override
+    public void parse(String line) {
+        String[] items = line.split(",");
+
+
+        this.id = Long.parseLong(items[0]);
+        this.name = items[1];
+        this.description = items[2];
+        this.price = Float.parseFloat(items[3]);
+        long idUser = Long.parseLong(items[4]);
+        this.userCreated = new User(idUser, "quangdang", "123123", ERole.USER);        // phải qua file user lây ra
+
+        String category = items[5];
+        this.eCategory = ECategory.getBy(category);
+
+
+        this.createAt = DateUtils.parse(items[6]);
+
+
+    }
+
 }

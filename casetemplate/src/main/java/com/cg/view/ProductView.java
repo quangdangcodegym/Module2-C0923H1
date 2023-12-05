@@ -1,5 +1,6 @@
 package com.cg.view;
 
+import com.cg.ShopApplication;
 import com.cg.model.ECategory;
 import com.cg.model.ERole;
 import com.cg.model.Product;
@@ -7,6 +8,7 @@ import com.cg.model.User;
 import com.cg.service.ProductService;
 import com.cg.utils.Config;
 import com.cg.utils.FileUtils;
+import com.cg.utils.InputUtils;
 import com.cg.utils.ValidateUtils;
 
 import java.time.LocalDate;
@@ -16,9 +18,12 @@ import java.util.Scanner;
 
 public class ProductView {
     private Scanner scanner = new Scanner(System.in);
+    private ShopApplication context;
 
     private ProductService productService;
-    public ProductView() {
+    public ProductView(ShopApplication shopApplication) {
+
+        this.context = shopApplication;
         productService = new ProductService();
         if (!FileUtils.checkFileExits(Config.PATH_FILE_PRODUCT)) {
             productService.init();
@@ -136,9 +141,9 @@ public class ProductView {
 
     public void editProduct() {
         Product pEdit = inputProductId("Nhập ID sản phẩn cần sửa: ");
-        String name = inputProductString("Nhập tên sản phẩm mới: ", ValidateUtils.USERNAME_REGEX,
+        String name = InputUtils.inputString("Nhập tên sản phẩm mới: ", ValidateUtils.USERNAME_REGEX,
                 "Tên sản phẩm không hợp lệ (chỉ từ 8-20 kí tự)");
-        String description = inputProductString("Nhập mô tả mới: ", ValidateUtils.DESCRIPTION_REGEX,
+        String description = InputUtils.inputString("Nhập mô tả mới: ", ValidateUtils.DESCRIPTION_REGEX,
                 "Mô tả sản phẩm không hợp lệ (chỉ từ 8-50 kí tự)");
 
         float price = inputProductPrice("Nhập giá mới", "Giá từ 0 - 10000000");
@@ -165,21 +170,7 @@ public class ProductView {
     }
 
 
-    public String inputProductString(String title, String regex, String errorMessage) {
-        String name;
-        boolean flag = false;
-        do {
-            System.out.println(title);
-            name = scanner.nextLine();
-            flag = ValidateUtils.isProductStringValid(name, regex);             // true - khớp với REGEX
 
-            if(!flag){      // false
-                // nếu ko khớp
-                System.out.println(errorMessage);
-            }
-        } while (!flag);
-        return name;
-    }
 
     public Product inputProductId(String title) {
         showProducts();
@@ -201,9 +192,9 @@ public class ProductView {
 
     public void createProduct() {
 
-       String name = inputProductString("Nhập tên sản phẩm: ", ValidateUtils.USERNAME_REGEX,
+       String name = InputUtils.inputString("Nhập tên sản phẩm: ", ValidateUtils.USERNAME_REGEX,
                "Tên sản phẩm không hợp lệ (chỉ từ 8-20 kí tự)");
-       String description = inputProductString("Nhập mô tả: ", ValidateUtils.DESCRIPTION_REGEX,
+       String description = InputUtils.inputString("Nhập mô tả: ", ValidateUtils.DESCRIPTION_REGEX,
                "Mô tả sản phẩm không hợp lệ (chỉ từ 8-50 kí tự)");
 
        float price = inputProductPrice("Nhập giá", "Giá từ 0 - 10000000");

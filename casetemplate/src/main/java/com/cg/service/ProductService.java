@@ -18,37 +18,7 @@ import java.util.Optional;
 
 public class ProductService {
     public List<Product> getAll() {
-
-        List<Product> products = new ArrayList<>();
-        try {
-            Reader reader = new FileReader("./data/product.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-
-            String line = null;
-            while ((line = bufferedReader.readLine()) != null) {
-                // line: 1,Iphone 11, Iphone 11 64GB RED,1000000,1,APPLE,2023-10-09
-                String[] items = line.split(",");
-                long id = Long.parseLong(items[0]);
-                String name = items[1];
-                String description = items[2];
-                float price = Float.parseFloat(items[3]);
-                long idUser = Long.parseLong(items[4]);
-                User user = new User(idUser, "quangdang", "123123", ERole.USER);        // phải qua file user lây ra
-                String category = items[5];
-                ECategory eCategory = ECategory.getBy(category);
-
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                LocalDate createAt = formatter.parse(items[6]).toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-
-
-                Product p = new Product(id, name, description, price, user, eCategory, createAt);
-                products.add(p);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return products;
+        return FileUtils.readFile(Config.PATH_FILE_PRODUCT, Product.class);
     }
 
     public void init() {
@@ -66,7 +36,10 @@ public class ProductService {
 
     }
     public void setCurrentId(){
-        Product.currentId = 4;
+        List<Product> products = getAll();
+
+        products.sort((o1, o2) -> Long.compare(o1.getId(), o2.getId()));
+        Product.currentId = products.get(products.size()-1).getId();
     }
 
     public void addProduct(Product pNew) {
