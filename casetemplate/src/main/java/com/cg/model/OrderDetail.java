@@ -19,6 +19,13 @@ public class OrderDetail implements IParser{
     public OrderDetail() {
     }
 
+    public OrderDetail( int quantity, float price, Product product, Order order) {
+        this.quantity = quantity;
+        this.price = price;
+        this.product = product;
+        this.order = order;
+    }
+
     public long getId() {
         return id;
     }
@@ -69,5 +76,10 @@ public class OrderDetail implements IParser{
         this.quantity = Integer.parseInt(items[3]);
         this.price = Float.parseFloat(items[4]);
 
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s,%s,%s,%s,%s", this.id, this.order.getId(), this.product.getId(), this.quantity, this.price);
     }
 }

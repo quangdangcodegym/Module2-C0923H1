@@ -16,11 +16,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class ProductView {
-    private Scanner scanner = new Scanner(System.in);
-    private ShopApplication context;
+public class ProductView extends BaseView{
 
-    private ProductService productService;
+
     public ProductView(ShopApplication shopApplication) {
 
         this.context = shopApplication;
@@ -115,21 +113,7 @@ public class ProductView {
         showProducts(products);
     }
 
-    public int getNumberMinMax(String str, int min, int max) throws IndexOutOfBoundsException {
-        System.out.println(str);
-        int num;
-        try {
-            num = Integer.parseInt(scanner.nextLine());
-            if(num < min || num > max) {
-                System.err.println("Chọn từ khoảng " + min + " và " + max);
-                return getNumberMinMax(str,min,max);
-            }
-            return num;
-        } catch (Exception e) {
-            System.err.println("Khong dung dinh dang");
-            return getNumberMinMax(str,min,max);
-        }
-    }
+
     private void deleteProduct() {
         Product product = inputProductId("Nhập sản phẩm cần xóa: ");
         boolean result = productService.removeProduct(product.getId());
@@ -172,23 +156,7 @@ public class ProductView {
 
 
 
-    public Product inputProductId(String title) {
-        showProducts();
-        System.out.println(title);
-        Product pEdit = null;
-        try {
-            long idProduct = Long.parseLong(scanner.nextLine());
-            pEdit = productService.findBy(idProduct);
 
-        } catch (NumberFormatException numberFormatException) {
-            System.out.println("ID không hop le. Vui lòng nhập lại");
-            inputProductId(title);
-        } catch (NoSuchElementException noSuchElementException) {
-            System.out.println("Không tìm thấy ID sản phẩm. Vui lòng nhập lại");
-            inputProductId(title);
-        }
-        return pEdit;
-    }
 
     public void createProduct() {
 

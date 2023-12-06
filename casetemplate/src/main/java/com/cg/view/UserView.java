@@ -13,10 +13,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserView {
-    Scanner scanner = new Scanner(System.in);
+public class UserView extends BaseView{
     private  UserService userService;
-    private ShopApplication context;
     public UserView(ShopApplication shopApplication){
         userService = new UserService();
         this.context = shopApplication;
