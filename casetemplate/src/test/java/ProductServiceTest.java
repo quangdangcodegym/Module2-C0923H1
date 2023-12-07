@@ -1,6 +1,3 @@
-package com.cg.test;
-
-
 import com.cg.model.ECategory;
 import com.cg.model.ERole;
 import com.cg.model.Product;

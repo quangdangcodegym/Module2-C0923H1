@@ -1,5 +1,3 @@
-package com.cg.test;
-
 import com.cg.exception.ParseDateException;
 import com.cg.utils.DateUtils;
 import org.junit.Test;
