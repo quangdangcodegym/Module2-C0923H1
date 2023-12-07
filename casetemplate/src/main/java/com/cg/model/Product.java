@@ -4,6 +4,7 @@ import com.cg.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Product implements IParser{
     public static long currentId = 0;
@@ -103,6 +104,19 @@ public class Product implements IParser{
 
     public void setCreateAt(LocalDate createAt) {
         this.createAt = createAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return id == product.id && Float.compare(product.price, price) == 0 && Objects.equals(name, product.name) && Objects.equals(description, product.description) && Objects.equals(userCreated.getId(), product.userCreated.getId()) && eCategory == product.eCategory && Objects.equals(createAt, product.createAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, price, userCreated, eCategory, createAt);
     }
 
     @Override

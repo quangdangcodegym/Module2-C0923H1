@@ -11,6 +11,7 @@ import com.cg.utils.InputUtils;
 import com.cg.utils.ValidateUtils;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -26,6 +27,7 @@ public class OrderView extends BaseView{
     private ProductService productService;
 
 
+
     public void launcher(){
         System.out.println("Menu quản lý hóa đơn: ");
         System.out.println("1. Xem danh sách hóa đơn");
@@ -37,6 +39,7 @@ public class OrderView extends BaseView{
         switch (actionMenu){
             case 1:{
                 showOrders();
+
                 break;
             }
             case 2:
@@ -51,6 +54,8 @@ public class OrderView extends BaseView{
 
     private void createOrder() {
 
+
+        System.out.println("Advav");
         Order order = new Order();
         order.setId(orderService.findMaxCurrentId() + 1);
 
@@ -95,6 +100,14 @@ public class OrderView extends BaseView{
         showOrders();
     }
 
+    /**
+     * Hàm này dùng để update so luong cua san pham trong order, so luong được cộng dồn
+     * @param product sản phẩm càn update
+     * @param quantity số lượng cần cộng thêm
+     * @param order hóa đơn cần cập nhật
+     *
+     * @return void
+     */
     private void updateProductQuantityInOrder(Product product, int quantity, Order order) {
         for (OrderDetail orderDetail : order.getOrderDetails()) {
             if (orderDetail.getProduct().getId() == product.getId()) {
