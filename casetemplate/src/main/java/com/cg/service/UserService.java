@@ -1,23 +1,14 @@
 package com.cg.service;
 
-import com.cg.model.ECategory;
-import com.cg.model.ERole;
 import com.cg.model.Product;
 import com.cg.model.User;
 import com.cg.utils.Config;
 import com.cg.utils.FileUtils;
 
-import javax.management.relation.Role;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.Reader;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService {
+public class UserService implements IUserService{
     public List<User> getAll(){
         return FileUtils.readFile(Config.PATH_FILE_USER, User.class);
     }

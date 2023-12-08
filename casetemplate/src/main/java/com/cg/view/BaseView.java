@@ -1,7 +1,9 @@
 package com.cg.view;
 
 import com.cg.ShopApplication;
+import com.cg.ioc.IOCContainer;
 import com.cg.model.Product;
+import com.cg.service.IProductService;
 import com.cg.service.ProductService;
 
 import java.util.NoSuchElementException;
@@ -10,10 +12,10 @@ import java.util.Scanner;
 public abstract class BaseView {
     protected Scanner scanner = new Scanner(System.in);
     protected ShopApplication context;
-    protected ProductService productService;
+    protected IProductService productService;
 
     public BaseView() {
-        productService = new ProductService();
+        productService = (IProductService) IOCContainer.getService("iProductService");
     }
 
     public Product inputProductId(String title) {

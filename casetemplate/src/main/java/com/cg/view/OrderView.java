@@ -1,10 +1,12 @@
 package com.cg.view;
 
 import com.cg.ShopApplication;
+import com.cg.ioc.IOCContainer;
 import com.cg.model.EStatus;
 import com.cg.model.Order;
 import com.cg.model.OrderDetail;
 import com.cg.model.Product;
+import com.cg.service.IOrderService;
 import com.cg.service.OrderService;
 import com.cg.service.ProductService;
 import com.cg.utils.InputUtils;
@@ -18,14 +20,11 @@ import java.util.Scanner;
 public class OrderView extends BaseView{
 
     public OrderView (ShopApplication context){
-        orderService = new OrderService();
-        productService = new ProductService();
+        orderService = (IOrderService) IOCContainer.getService("iOrderService");
         this.context = context;
     }
 
-    private OrderService orderService ;
-    private ProductService productService;
-
+    private IOrderService orderService ;
 
 
     public void launcher(){

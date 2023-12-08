@@ -1,0 +1,5 @@
+## iProductService LÀ SERVICE HIỆN TẠI ĐANG CHẠY
+iProductService=com.cg.service.ProductServiceMySQL
+iUserService=com.cg.service.UserService
+iOrderService=com.cg.service.OrderService
+iOrderDetailService=com.cg.service.OrderDetailService

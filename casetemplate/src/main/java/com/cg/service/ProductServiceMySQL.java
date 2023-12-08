@@ -11,7 +11,7 @@ import com.cg.utils.FileUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductService implements IProductService{
+public class ProductServiceMySQL implements IProductService{
     public List<Product> getAll() {
         return FileUtils.readFile(Config.PATH_FILE_PRODUCT, Product.class);
     }
@@ -84,5 +84,4 @@ public class ProductService implements IProductService{
         FileUtils.writeFile(products, Config.PATH_FILE_PRODUCT);
         return result;
     }
-
 }

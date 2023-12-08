@@ -8,7 +8,7 @@ import com.cg.utils.FileUtils;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderDetailService {
+public class OrderDetailService implements IOrderDetailService{
     public List<OrderDetail> getAll() {
         List<OrderDetail> orderDetails =  FileUtils.readFile(Config.PATH_FILE_ORDER_DETAIL, OrderDetail.class);
         return orderDetails;

@@ -1,6 +1,7 @@
 package com.cg.view;
 
 import com.cg.ShopApplication;
+import com.cg.ioc.IOCContainer;
 import com.cg.model.ECategory;
 import com.cg.model.ERole;
 import com.cg.model.Product;
@@ -22,7 +23,6 @@ public class ProductView extends BaseView{
     public ProductView(ShopApplication shopApplication) {
 
         this.context = shopApplication;
-        productService = new ProductService();
         if (!FileUtils.checkFileExits(Config.PATH_FILE_PRODUCT)) {
             productService.init();
         }else{

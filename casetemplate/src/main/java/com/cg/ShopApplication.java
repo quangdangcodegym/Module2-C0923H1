@@ -1,7 +1,9 @@
 package com.cg;
 
+import com.cg.ioc.IOCContainer;
 import com.cg.model.ERole;
 import com.cg.model.User;
+import com.cg.service.IProductService;
 import com.cg.utils.DateUtils;
 import com.cg.view.OrderView;
 import com.cg.view.ProductView;
@@ -26,12 +28,13 @@ public class ShopApplication {
 
 
     public static void main(String[] args) {
+
         ShopApplication shopApplication = new ShopApplication();
         shopApplication.run();
     }
 
     private void run() {
-        orderView.launcher();
+        productView.launcher();
     }
 
     public ProductView getProductView() {

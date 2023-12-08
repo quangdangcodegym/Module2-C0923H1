@@ -1,16 +1,16 @@
 package com.cg.service;
 
+import com.cg.ioc.IOCContainer;
 import com.cg.model.Order;
-import com.cg.model.Product;
 import com.cg.utils.Config;
 import com.cg.utils.FileUtils;
 
 import java.util.List;
 
-public class OrderService {
-    private OrderDetailService orderDetailService;
+public class OrderService implements IOrderService{
+    private IOrderDetailService orderDetailService;
     public OrderService(){
-        this.orderDetailService = new OrderDetailService();
+        this.orderDetailService = (IOrderDetailService) IOCContainer.getService("iOrderDetailService");
     }
 
     public List<Order> getAll() {
