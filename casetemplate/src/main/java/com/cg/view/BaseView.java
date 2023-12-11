@@ -4,7 +4,6 @@ import com.cg.ShopApplication;
 import com.cg.ioc.IOCContainer;
 import com.cg.model.Product;
 import com.cg.service.IProductService;
-import com.cg.service.ProductService;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;

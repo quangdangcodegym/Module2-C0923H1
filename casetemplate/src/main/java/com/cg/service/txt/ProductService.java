@@ -1,9 +1,10 @@
-package com.cg.service;
+package com.cg.service.txt;
 
 import com.cg.model.ECategory;
 import com.cg.model.ERole;
 import com.cg.model.Product;
 import com.cg.model.User;
+import com.cg.service.IProductService;
 import com.cg.utils.Config;
 import com.cg.utils.DateUtils;
 import com.cg.utils.FileUtils;
@@ -11,7 +12,7 @@ import com.cg.utils.FileUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductServiceMySQL implements IProductService{
+public class ProductService implements IProductService {
     public List<Product> getAll() {
         return FileUtils.readFile(Config.PATH_FILE_PRODUCT, Product.class);
     }
@@ -84,4 +85,5 @@ public class ProductServiceMySQL implements IProductService{
         FileUtils.writeFile(products, Config.PATH_FILE_PRODUCT);
         return result;
     }
+
 }

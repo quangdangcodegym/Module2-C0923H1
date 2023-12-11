@@ -1,14 +1,15 @@
-package com.cg.service;
+package com.cg.service.txt;
 
 import com.cg.model.Order;
 import com.cg.model.OrderDetail;
+import com.cg.service.IOrderDetailService;
 import com.cg.utils.Config;
 import com.cg.utils.FileUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderDetailService implements IOrderDetailService{
+public class OrderDetailService implements IOrderDetailService {
     public List<OrderDetail> getAll() {
         List<OrderDetail> orderDetails =  FileUtils.readFile(Config.PATH_FILE_ORDER_DETAIL, OrderDetail.class);
         return orderDetails;

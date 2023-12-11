@@ -2,14 +2,20 @@ package com.cg.model;
 
 import com.cg.utils.DateUtils;
 
-import java.text.SimpleDateFormat;
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "users")
 public class User implements IParser{
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String password;
 
+    @Enumerated(EnumType.STRING)
     private ERole eRole;
     private LocalDate createAt;
     public static long currentId = 0;
@@ -46,11 +52,11 @@ public class User implements IParser{
         this.createAt = createAt;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

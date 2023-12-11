@@ -4,7 +4,7 @@ import com.cg.ShopApplication;
 import com.cg.ioc.IOCContainer;
 import com.cg.model.ERole;
 import com.cg.model.User;
-import com.cg.service.UserService;
+import com.cg.service.txt.UserService;
 import com.cg.utils.Config;
 import com.cg.utils.FileUtils;
 import com.cg.utils.InputUtils;
@@ -12,7 +12,6 @@ import com.cg.utils.ValidateUtils;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
 
 public class UserView extends BaseView{
     private  UserService userService;
@@ -28,26 +27,45 @@ public class UserView extends BaseView{
 
     }
     public void launcher() {
+        boolean checkContinue;
+        do {
+            checkContinue = false;
+            System.out.println("Menu quản lý User: ");
+            System.out.println("1. Xem danh sách");
+            System.out.println("2. Thêm User ");
+            System.out.println("3. Sửa User ");
+            System.out.println("4. Xóa User ");
+            System.out.println("5. Sắp User: ");
+            System.out.println("6. Tìm kiếm User:");
+            System.out.println("7. Quay lại");
+            System.out.println("Moi nhập");
+            int actionMenu = Integer.parseInt(scanner.nextLine());
+            switch (actionMenu){
+                case 1 :{
+                    showUsers();
+                    break;
+                }
+                case 2:{
+                    insertUser();
+                    break;
+                }
+                case 7:
+                {
+                    checkContinue = false;
+                    break;
+                }
 
-        System.out.println("Menu quản lý User: ");
-        System.out.println("1. Xem danh sách");
-        System.out.println("2. Thêm User ");
-        System.out.println("3. Sửa User ");
-        System.out.println("4. Xóa User ");
-        System.out.println("5. Sắp User: ");
-        System.out.println("6. Tìm kiếm User:");
-        System.out.println("Moi nhập");
-        int actionMenu = Integer.parseInt(scanner.nextLine());
-        switch (actionMenu){
-            case 1 :{
-                showUsers();
-                break;
             }
-            case 2:{
-                insertUser();
-                break;
+            int choice = getNumberMinMax("Bạn có muốn dừng không? 1. Y / 2.N", 1, 2);
+            switch (choice) {
+                case 1:
+                    checkContinue = false;
+                    break;
+                case 2:
+                    checkContinue = true;
+                    break;
             }
-        }
+        } while (checkContinue);
     }
 
     private void insertUser() {

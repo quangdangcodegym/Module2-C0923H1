@@ -1,12 +1,8 @@
 package com.cg.view;
 
 import com.cg.ShopApplication;
-import com.cg.ioc.IOCContainer;
-import com.cg.model.ECategory;
-import com.cg.model.ERole;
-import com.cg.model.Product;
-import com.cg.model.User;
-import com.cg.service.ProductService;
+import com.cg.model.*;
+import com.cg.service.mysql.ProductServiceMySQL;
 import com.cg.utils.Config;
 import com.cg.utils.FileUtils;
 import com.cg.utils.InputUtils;
@@ -14,8 +10,6 @@ import com.cg.utils.ValidateUtils;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class ProductView extends BaseView{
 
@@ -30,43 +24,61 @@ public class ProductView extends BaseView{
         }
     }
     public void launcher(){
-        System.out.println("Menu quản lý sản phẩm: ");
-        System.out.println("1. Xem danh sách");
-        System.out.println("2. Thêm sản phẩm ");
-        System.out.println("3. Sửa sản phâm ");
-        System.out.println("4. Xóa sản phâm ");
-        System.out.println("5. Sắp xếp sản phẩm: ");
-        System.out.println("6. Tìm kiếm sản phẩm:");
+        boolean checkContinue;
+        do {
+            checkContinue = false;
+            System.out.println("Menu quản lý sản phẩm: ");
+            System.out.println("1. Xem danh sách");
+            System.out.println("2. Thêm sản phẩm ");
+            System.out.println("3. Sửa sản phâm ");
+            System.out.println("4. Xóa sản phâm ");
+            System.out.println("5. Sắp xếp sản phẩm: ");
+            System.out.println("6. Tìm kiếm sản phẩm:");
+            System.out.println("7. Quay lại");
+            System.out.println("Moi nhập");
+            int actionMenu = Integer.parseInt(scanner.nextLine());
+            switch (actionMenu) {
+                case 1: {
+                    showProducts();
+                    break;
+                }
+                case 2: {
+                    createProduct();
+                    break;
+                }
+                case 3: {
+                    editProduct();
+                    break;
+                }
+                case 4: {
+                    deleteProduct();
+                    break;
+                }
+                case 5: {
+                    sortProduct();
+                    break;
+                }
+                case 6: {
+                    searchProduct();
+                    break;
+                }
+                case 7:
+                {
+                    checkContinue = false;
+                    break;
+                }
+            }
+            int choice = getNumberMinMax("Bạn có muốn dừng không? 1. Y / 2.N", 1, 2);
+            switch (choice) {
+                case 1:
+                    checkContinue = false;
+                    break;
+                case 2:
+                    checkContinue = true;
+                    break;
+            }
+        } while (checkContinue);
 
-        System.out.println("Moi nhập");
-        int actionMenu = Integer.parseInt(scanner.nextLine());
-        switch (actionMenu){
-            case 1:{
-                showProducts();
-                break;
-            }
-            case 2:
-            {
-                createProduct();
-                break;
-            }
-            case 3:{
-                editProduct();
-                break;
-            }
-            case 4:{
-                deleteProduct();
-                break;
-            }
-            case 5:{
-                sortProduct();
-                break;
-            }
-            case 6:{
-                searchProduct();
-                break;
-            }
-        }
 
     }
 
@@ -153,11 +165,6 @@ public class ProductView extends BaseView{
 
     }
 
-
-
-
-
-
     public void createProduct() {
 
        String name = InputUtils.inputString("Nhập tên sản phẩm: ", ValidateUtils.USERNAME_REGEX,
@@ -205,7 +212,11 @@ public class ProductView extends BaseView{
     }
 
     public void showProducts(){
+
+
         List<Product> products = productService.getAll();
+
+        List<ProductDTO> productDTOS = ((ProductServiceMySQL) productService).getAllProductDTO();
         System.out.printf("%10s | %20s | %30s | %15s | %10s | %20s | %20s\n", "ID", "Name", "Description", "Price", "User", "Category", "Create at");
         for (Product p : products) {
             System.out.printf("%10s | %20s | %30s | %15s | %10s | %20s | %20s\n",

@@ -7,15 +7,11 @@ import com.cg.model.Order;
 import com.cg.model.OrderDetail;
 import com.cg.model.Product;
 import com.cg.service.IOrderService;
-import com.cg.service.OrderService;
-import com.cg.service.ProductService;
 import com.cg.utils.InputUtils;
 import com.cg.utils.ValidateUtils;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 public class OrderView extends BaseView{
 
@@ -28,33 +24,49 @@ public class OrderView extends BaseView{
 
 
     public void launcher(){
-        System.out.println("Menu quản lý hóa đơn: ");
-        System.out.println("1. Xem danh sách hóa đơn");
-        System.out.println("2. Tạo don hàng ");
-        System.out.println("3. Cập nhật hóa đơn: ");
+        boolean checkContinue;
+        do {
+            checkContinue = false;
+            System.out.println("Menu quản lý hóa đơn: ");
+            System.out.println("1. Xem danh sách hóa đơn");
+            System.out.println("2. Tạo don hàng ");
+            System.out.println("3. Cập nhật hóa đơn: ");
 
-        System.out.println("Moi nhập");
-        int actionMenu = Integer.parseInt(scanner.nextLine());
-        switch (actionMenu){
-            case 1:{
-                showOrders();
+            System.out.println("7. Quay lại");
+            System.out.println("Moi nhập");
+            int actionMenu = Integer.parseInt(scanner.nextLine());
+            switch (actionMenu){
+                case 1:{
+                    showOrders();
 
-                break;
+                    break;
+                }
+                case 2:
+                {
+                    createOrder();
+                    break;
+                }
+                case 7:
+                {
+                    checkContinue = false;
+                    break;
+                }
+
             }
-            case 2:
-            {
-                createOrder();
-                break;
+            int choice = getNumberMinMax("Bạn có muốn dừng không? 1. Y / 2.N", 1, 2);
+            switch (choice) {
+                case 1:
+                    checkContinue = false;
+                    break;
+                case 2:
+                    checkContinue = true;
+                    break;
             }
-
-        }
-
+        } while (checkContinue);
     }
 
     private void createOrder() {
 
-
-        System.out.println("Advav");
         Order order = new Order();
         order.setId(orderService.findMaxCurrentId() + 1);
 

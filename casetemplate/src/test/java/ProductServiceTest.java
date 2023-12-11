@@ -2,11 +2,9 @@ import com.cg.model.ECategory;
 import com.cg.model.ERole;
 import com.cg.model.Product;
 import com.cg.model.User;
+import com.cg.service.txt.ProductService;
 import com.cg.utils.DateUtils;
 import org.junit.Test;
-
-import java.util.Arrays;
-import com.cg.service.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

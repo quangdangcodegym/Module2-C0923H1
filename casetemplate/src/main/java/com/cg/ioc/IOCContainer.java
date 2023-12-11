@@ -1,9 +1,13 @@
 package com.cg.ioc;
 
+import com.cg.model.Product;
 import com.cg.service.IOrderDetailService;
 import com.cg.service.IProductService;
 import com.cg.service.IService;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,6 +37,15 @@ public class IOCContainer {
         } catch (IllegalAccessException e) {
             return null;
         }
+    }
+    public static EntityManager entityManager;
+
+    public static EntityManager getEntityManager(){
+        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("persistence");
+        if (entityManager == null) {
+            entityManager = entityManagerFactory.createEntityManager();
+        }
+        return entityManager;
     }
 
 }

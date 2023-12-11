@@ -1,14 +1,15 @@
-package com.cg.service;
+package com.cg.service.txt;
 
 import com.cg.model.Product;
 import com.cg.model.User;
+import com.cg.service.IUserService;
 import com.cg.utils.Config;
 import com.cg.utils.FileUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserService implements IUserService{
+public class UserService implements IUserService {
     public List<User> getAll(){
         return FileUtils.readFile(Config.PATH_FILE_USER, User.class);
     }

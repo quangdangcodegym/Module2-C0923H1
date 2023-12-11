@@ -1,13 +1,17 @@
 package com.cg;
 
 import com.cg.ioc.IOCContainer;
+import com.cg.model.ECategory;
 import com.cg.model.ERole;
+import com.cg.model.Product;
 import com.cg.model.User;
 import com.cg.service.IProductService;
 import com.cg.utils.DateUtils;
 import com.cg.view.OrderView;
 import com.cg.view.ProductView;
 import com.cg.view.UserView;
+
+import javax.persistence.EntityManager;
 
 public class ShopApplication {
     private ProductView productView;
@@ -29,12 +33,44 @@ public class ShopApplication {
 
     public static void main(String[] args) {
 
+
         ShopApplication shopApplication = new ShopApplication();
         shopApplication.run();
     }
 
     private void run() {
-        productView.launcher();
+        boolean flagChoiceContinue;
+        do {
+            flagChoiceContinue = false;
+            System.out.println("Chọn chức năng: ");
+            String menu =       "1. Quản lý sản phẩm \n" +
+                                "2. Quản lý order \n"+
+                                "3. Quản lý user";
+
+            int choice = getUserView().getNumberMinMax(menu, 1, 3);
+            switch (choice) {
+                case 1:
+                    productView.launcher();
+                    break;
+                case 2:
+                    orderView.launcher();
+                    break;
+                case 3:
+                    userView.launcher();
+            }
+            String menuContinue =   "Bạn có muốn tiếp tục không? \n" +
+                                    "1. Yes\n" +
+                                    "2. No\n";
+            int choiceContinue = getUserView().getNumberMinMax(menuContinue, 1, 3);
+            switch (choiceContinue) {
+                case 1:
+                    flagChoiceContinue = true;
+                    break;
+                case 2:
+                    flagChoiceContinue = false;
+                    break;
+            }
+        } while (flagChoiceContinue);
     }
 
     public ProductView getProductView() {

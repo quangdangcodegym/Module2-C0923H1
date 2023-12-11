@@ -2,18 +2,26 @@ package com.cg.model;
 
 import com.cg.utils.DateUtils;
 
-import java.text.SimpleDateFormat;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity
+@Table(name = "products")
 public class Product implements IParser{
     public static long currentId = 0;
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String description;
     private float price;
 
+    @OneToOne
     private User userCreated;
+
+    @Enumerated(EnumType.STRING)
     private ECategory eCategory;
 
     private LocalDate createAt;         // Kiểu Date: Instant, Date (util)
@@ -50,11 +58,11 @@ public class Product implements IParser{
                 this.description, this.price, this.userCreated.getId(), this.eCategory, this.createAt);
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

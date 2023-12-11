@@ -2,20 +2,28 @@ package com.cg.model;
 
 import com.cg.utils.DateUtils;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "orders")
 public class Order implements IParser{
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private LocalDate createAt;
 
     private String fullName;
     private String phone;
     private Double total;
 
+    @Enumerated(EnumType.STRING)
     private EStatus eStatus;
 
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<OrderDetail> orderDetails;
 
     public List<OrderDetail> getOrderDetails() {
@@ -49,11 +57,11 @@ public class Order implements IParser{
         this.total = total;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -117,4 +125,6 @@ public class Order implements IParser{
 
         this.total = total;
     }
+
+
 }
